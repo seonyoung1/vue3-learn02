@@ -1,6 +1,10 @@
 <template>
-	<header>header</header>
-	<RouterView />
+	<TheHeader />
+	<main>
+		<RouterView />
+	</main>
 </template>
 
-<script setup></script>
+<script setup>
+import TheHeader from '@/layouts/TheHeader.vue';
+</script>

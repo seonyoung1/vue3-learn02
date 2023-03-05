@@ -10,6 +10,7 @@ export default defineConfig({
 		vue(),
 		Components({
 			resolvers: [AntDesignVueResolver()],
+			dts: true,
 		}),
 	],
 	resolve: {
