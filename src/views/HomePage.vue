@@ -1,5 +1,4 @@
 <template>
-	<h2>Home</h2>
-	<a-button type="primary">Primary Button</a-button>
+	<h2>main</h2>
 </template>
 <script setup></script>

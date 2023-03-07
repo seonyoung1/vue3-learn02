@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/views/HomePage.vue';
 import LoginPage from '@/views/LoginPage.vue';
 import SignupPage from '@/views/SignupPage.vue';
+import PopularPage from '@/views/PopularPage.vue';
+import DetailPage from '@/views/DetailPage.vue';
 import NotFound from '@/views/NotFound.vue';
 const routes = [
 	{
@@ -18,6 +20,16 @@ const routes = [
 		path: '/signup',
 		name: 'Sign',
 		component: SignupPage,
+	},
+	{
+		path: '/popular',
+		name: 'Popular',
+		component: PopularPage,
+	},
+	{
+		path: '/popular/:id',
+		name: 'Detail',
+		component: DetailPage,
 	},
 	{
 		path: '/:pathMatch(.*)*',
