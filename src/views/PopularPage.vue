@@ -1,15 +1,15 @@
 <template>
 	<div class="popular__wrap">
 		<h2>Popular Movies</h2>
-		<div v-if="loading">loading: {{ loading }}</div>
+		<TableLoading v-if="loading" />
 		<div v-else-if="error">{{ error }}</div>
 		<template v-else>
 			<table class="q-table">
 				<colgroup>
 					<col width="40%" />
+					<col width="25%" />
 					<col width="20%" />
-					<col width="20%" />
-					<col width="20%" />
+					<col width="15%" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -25,16 +25,22 @@
 							<span class="original">{{ td.original_title }}</span>
 						</td>
 						<td class="text-left">{{ td.genre_ids }}</td>
-						<td class="text-center">{{ td.vote_average }}</td>
+						<td class="text-center">
+							<TableRating :point="td.vote_average" />
+						</td>
 						<td class="text-center">{{ td.release_date }}</td>
 					</tr>
 				</tbody>
 			</table>
 		</template>
-		<q-pagination v-model="current" :max="100" input @click="goFetch" class="justify-center" />
+		<div class="q-pa-lg flex flex-center">
+			<q-pagination v-model="current" :max="10" :max-pages="5" :ellipses="false" :boundary-numbers="false" direction-links @click="goFetch" />
+		</div>
 	</div>
 </template>
 <script setup>
+import TableRating from '@/components/TableRating.vue';
+import TableLoading from '@/components/TableLoading.vue';
 import { movieApi } from '@/api';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -82,10 +88,8 @@ async function fetchData(page) {
 fetchData(current.value);
 const goFetch = () => {
 	fetchData(current.value);
-	console.log(current.value);
 };
 const goDetail = id => {
-	console.log(id);
 	router.push(`/popular/${id}`);
 };
 </script>

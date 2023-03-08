@@ -9,10 +9,10 @@
 				<q-btn to="/popular" outline label="Search" />
 			</q-btn-group>
 		</nav>
-		<div class="links">
-			<q-btn to="/login" flat label="Login" />
-			<q-btn to="/signup" flat label="Sign Up" />
-		</div>
+		<!--		<div class="links">-->
+		<!--			<q-btn to="/login" flat label="Login" />-->
+		<!--			<q-btn to="/signup" flat label="Sign Up" />-->
+		<!--		</div>-->
 	</header>
 </template>
 <style scoped>
