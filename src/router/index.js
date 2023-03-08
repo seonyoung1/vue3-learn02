@@ -3,6 +3,7 @@ import HomePage from '@/views/HomePage.vue';
 import LoginPage from '@/views/LoginPage.vue';
 import SignupPage from '@/views/SignupPage.vue';
 import PopularPage from '@/views/PopularPage.vue';
+import DiscoverPage from '@/views/DiscoverPage.vue';
 import DetailPage from '@/views/DetailPage.vue';
 import NotFound from '@/views/NotFound.vue';
 const routes = [
@@ -27,7 +28,12 @@ const routes = [
 		component: PopularPage,
 	},
 	{
-		path: '/popular/:id',
+		path: '/discover',
+		name: 'Discover',
+		component: DiscoverPage,
+	},
+	{
+		path: '/movies/:id',
 		name: 'Detail',
 		component: DetailPage,
 	},

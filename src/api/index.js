@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api = axios.create({
+export const api = axios.create({
 	baseURL: 'https://api.themoviedb.org/3/',
 	params: {
 		api_key: '6f26edc26d6ed9d164d9bc332258be3f',
@@ -15,11 +15,9 @@ export const movieApi = {
 				page,
 			},
 		}),
-	search: term =>
-		api.get('search/movie', {
-			params: {
-				query: term,
-			},
+	discover: param =>
+		api.get('discover/movie', {
+			params: param,
 		}),
 	detail: id =>
 		api.get(`movie/${id}&append_to_response=videos`, {

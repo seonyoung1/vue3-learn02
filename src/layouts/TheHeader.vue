@@ -5,8 +5,8 @@
 		</h1>
 		<nav>
 			<q-btn-group outline>
-				<q-btn to="/popular" outline label="Popular movies" />
-				<q-btn to="/popular" outline label="Search" />
+				<q-btn to="/popular" outline label="Popular" />
+				<q-btn to="/discover" outline label="Discover" />
 			</q-btn-group>
 		</nav>
 		<!--		<div class="links">-->
