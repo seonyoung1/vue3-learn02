@@ -31,7 +31,6 @@ const onSubmit = (sort, genres) => {
 async function fetchData(sort = 'release_date.desc', genres = '') {
 	try {
 		const genre = genres !== '' ? genres.join() : '';
-		console.log('genre', genre);
 		loading.value = true;
 		const res = await api.get('discover/movie', {
 			params: {
