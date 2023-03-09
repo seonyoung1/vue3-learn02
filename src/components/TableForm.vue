@@ -2,9 +2,9 @@
 	<form @submit.prevent="$emit('onSubmit', sort, genres)" class="q-gutter-y-md">
 		<div class="row items-center">
 			<div class="q-gutter-sm">
-				<q-radio v-model="sort" val="release_date.desc" label="Recent" />
-				<q-radio v-model="sort" val="popularity.desc" label="Popular" />
-				<q-radio v-model="sort" val="vote_average.desc" label="Average" />
+				<q-radio v-model="sort" val="release_date.desc" label="최근" />
+				<q-radio v-model="sort" val="popularity.desc" label="인기" />
+				<q-radio v-model="sort" val="vote_count.desc" label="추천수" />
 			</div>
 		</div>
 		<div class="row q-gutter-sm">
@@ -17,8 +17,10 @@
 			</div>
 			<p class="col-12 tooltip">* 아무것도 선택하지 않으면 전체로 나옵니다</p>
 		</div>
-		<q-btn label="Search" type="submit" color="primary" />
-		<q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+		<div class="row justify-end">
+			<q-btn label="Search" type="submit" color="primary" />
+			<q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+		</div>
 	</form>
 </template>
 <script setup>
@@ -36,7 +38,7 @@ label {
 }
 .tooltip {
 	font-size: 0.9em;
-	text-align: right;
+	//text-align: right;
 	color: #888;
 }
 </style>

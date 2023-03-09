@@ -26,4 +26,16 @@ export const movieApi = {
 			},
 		}),
 	genre: () => api.get('genre/movie/list'),
+	nowPlaying: (page = 1) =>
+		api.get('movie/now_playing', {
+			params: {
+				page,
+			},
+		}),
+	topRating: (page = 1) =>
+		api.get('movie/top_rated', {
+			params: {
+				page,
+			},
+		}),
 };
