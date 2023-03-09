@@ -16,8 +16,8 @@ import TableForm from '@/components/TableForm.vue';
 import TableLists from '@/components/TableLists.vue';
 import TableLoading from '@/components/TableLoading.vue';
 import { ref } from 'vue';
-import { api } from '@/api';
 import { useRouter } from 'vue-router';
+import { movieApi } from '@/api';
 
 const router = useRouter();
 const current = ref(1);
@@ -32,14 +32,13 @@ async function fetchData(sort = 'release_date.desc', genres = '') {
 	try {
 		const genre = genres !== '' ? genres.join() : '';
 		loading.value = true;
-		const res = await api.get('discover/movie', {
-			params: {
-				'vote_average.gte': 5,
-				page: current.value,
-				sort_by: sort, // popularity.desc
-				with_genres: genre,
-			},
-		});
+		const params = {
+			'vote_average.gte': 5,
+			page: current.value,
+			sort_by: sort, // release_date.desc, popularity.desc, vote_average.desc
+			with_genres: genre,
+		};
+		const res = await movieApi.discover(params);
 		data.value = res.data.results;
 	} catch (err) {
 		error.value = err;

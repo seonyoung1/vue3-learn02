@@ -1,5 +1,7 @@
 <template>
-	<div class="row q-gutter-x-md details__wrap">
+	<TableLoading v-if="loading" />
+	<div v-else-if="error">{{ error }}</div>
+	<div v-else class="row q-gutter-x-md details__wrap">
 		<div class="col poster">
 			<img :src="`https://image.tmdb.org/t/p/w300/${data.poster_path}`" alt="" />
 		</div>
@@ -20,19 +22,24 @@
 	</div>
 </template>
 <script setup>
+import TableLoading from '@/components/TableLoading.vue';
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
 import { movieApi } from '../api';
 const route = useRoute();
 const id = route.params.id;
+const loading = ref(false);
+const error = ref(null);
 const data = ref({});
 async function fetchData() {
 	try {
+		loading.value = true;
 		const res = await movieApi.detail(id);
 		data.value = res.data;
-		console.log(data.value);
-	} catch (e) {
-		console.log(e);
+	} catch (err) {
+		error.value = err;
+	} finally {
+		loading.value = false;
 	}
 }
 fetchData();

@@ -14,8 +14,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr v-for="td in data" :key="td.id" @click.stop="$emit('goDetail', td.id)">
-				<td class="text-left">
+			<tr v-for="td in data" :key="td.id">
+				<td class="links text-left" @click.stop="$emit('goDetail', td.id)">
 					{{ td.title }}
 					<span class="original">{{ td.original_title }}</span>
 				</td>
@@ -38,13 +38,12 @@ const columns = [
 		name: 'title',
 		required: true,
 		label: '제목',
-		align: 'left',
-		sortable: true,
+		align: 'center',
 	},
 	{
 		name: 'genre',
 		label: '장르',
-		align: 'left',
+		align: 'center',
 	},
 	{
 		name: 'vote_average',
@@ -72,5 +71,8 @@ defineEmits(['goDetail']);
 	display: block;
 	font-size: 0.8rem;
 	color: #888;
+}
+.links {
+	cursor: pointer;
 }
 </style>

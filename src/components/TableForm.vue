@@ -4,6 +4,7 @@
 			<div class="q-gutter-sm">
 				<q-radio v-model="sort" val="release_date.desc" label="Recent" />
 				<q-radio v-model="sort" val="popularity.desc" label="Popular" />
+				<q-radio v-model="sort" val="vote_average.desc" label="Average" />
 			</div>
 		</div>
 		<div class="row q-gutter-sm">

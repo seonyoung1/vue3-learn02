@@ -3,6 +3,7 @@ import { movieApi } from '@/api';
 
 export const useMovieStore = defineStore('movie', {
 	state: () => ({
+		genres: [],
 		genreList: [
 			{ id: 28, name: '액션' },
 			{ id: 12, name: '모험' },
@@ -28,11 +29,13 @@ export const useMovieStore = defineStore('movie', {
 	getters: {},
 	actions: {
 		async onGenreList() {
-			if (this.genreList.length > 0) return;
+			// if (this.genreList.length > 0) return;
 			const {
 				data: { genres },
 			} = await movieApi.genre();
-			this.genreList = genres;
+			// console.log(genres);
+			return genres;
+			// this.genreList = genres;
 		},
 	},
 });
