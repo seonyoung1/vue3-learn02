@@ -4,6 +4,7 @@ import LoginPage from '@/views/LoginPage.vue';
 import SignupPage from '@/views/SignupPage.vue';
 import PopularPage from '@/views/PopularPage.vue';
 import DiscoverPage from '@/views/DiscoverPage.vue';
+import SearchPage from '@/views/SearchPage.vue';
 import DetailPage from '@/views/DetailPage.vue';
 import NotFound from '@/views/NotFound.vue';
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
 		path: '/movies/:id',
 		name: 'Detail',
 		component: DetailPage,
+	},
+	{
+		path: '/search',
+		name: 'Search',
+		component: SearchPage,
 	},
 	{
 		path: '/:pathMatch(.*)*',

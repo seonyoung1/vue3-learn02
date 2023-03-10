@@ -28,23 +28,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 html {
-    @include vw-font-size-mo(16);
+
 }
 
 body {
     letter-spacing: -0.02em;
     line-height: 1.5;
-    color: $black;
-    font-family: $primary-font;
+    color: #000;
+    //font-family: $primary-font;
     -webkit-text-size-adjust: none;
     -moz-text-size-adjust: none;
     -ms-text-size-adjust: none;
     -webkit-font-smooting: antialiased;
     -moz-font-smoothing: grayscale;
-}
-
-body, input, select, button, textarea, h1, h2, h3, h4, h5, h6, table {
-    font: 500 14px $primary-font;
 }
 
 nav ul {
@@ -67,14 +63,14 @@ q:after {
 /* change colours to suit your needs */
 ins {
     background-color: #ff9;
-    color: $black;
+    //color: #000;
     text-decoration: none;
 }
 
 /* change colours to suit your needs */
 mark {
     background-color: #ff9;
-    color: $black;
+    //color: #000;
     font-style: italic;
     font-weight: bold;
 }
@@ -107,7 +103,7 @@ input, select, textarea {
     vertical-align: middle;
     box-sizing: border-box;
     border-radius: 0;
-    font-family: $primary-font;
+    //font-family: $primary-font;
     font-size: 1rem;
     letter-spacing: -0.02em;
 }
@@ -134,7 +130,7 @@ button {
     border: 0;
     background: transparent;
     cursor: pointer;
-    font-family: $primary-font;
+    //font-family: $primary-font;
     font-size: 1rem;
     margin: 0;
     letter-spacing: -0.02em;

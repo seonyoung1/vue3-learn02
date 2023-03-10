@@ -15,9 +15,11 @@
 		</thead>
 		<tbody>
 			<tr v-for="td in data" :key="td.id">
-				<td class="links text-left" @click.stop="$emit('goDetail', td.id)">
-					{{ td.title }}
-					<span class="original">{{ td.original_title }}</span>
+				<td class="links text-left">
+					<RouterLink :to="`/movies/${td.id}`" class="links">
+						{{ td.title }}
+						<span class="original">{{ td.original_title }}</span>
+					</RouterLink>
 				</td>
 				<td class="text-left">
 					<TableGenre :list="td.genre_ids" />
@@ -59,7 +61,6 @@ const columns = [
 defineProps({
 	data: Array,
 });
-defineEmits(['goDetail']);
 </script>
 <style scoped lang="scss">
 .q-table {
@@ -74,5 +75,6 @@ defineEmits(['goDetail']);
 }
 .links {
 	cursor: pointer;
+	display: block;
 }
 </style>
