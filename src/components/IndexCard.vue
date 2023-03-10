@@ -1,5 +1,4 @@
 <template>
-	<h2 class="index_title">{{ title }}</h2>
 	<div class="row q-gutter-x-md">
 		<template v-for="item in data" :key="item.id">
 			<RouterLink :to="`/movies/${item.id}`" class="col column">
@@ -14,13 +13,9 @@
 <script setup>
 defineProps({
 	data: Object,
-	title: String,
 });
 </script>
 <style scoped lang="scss">
-.index_title {
-	padding: 30px 0;
-}
 .images {
 	background-color: #000;
 	img {

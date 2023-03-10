@@ -1,7 +1,9 @@
 <template>
 	<div class="index__wrap">
-		<IndexCard :data="nowPlaying" title="Now Playing" />
-		<IndexCard :data="topRating" title="Top Rating" />
+		<h2 class="index_title">Now Playing</h2>
+		<IndexCard :data="nowPlaying" />
+		<h2 class="index_title">Top Rating</h2>
+		<IndexCard :data="topRating" />
 	</div>
 </template>
 <script setup>
@@ -33,5 +35,8 @@ fetchTopRating();
 <style scoped lang="scss">
 .index__wrap {
 	padding: 0 0 100px;
+}
+.index_title {
+	padding: 30px 0;
 }
 </style>
