@@ -4,6 +4,7 @@ import { createPinia } from 'pinia';
 import { VueQueryPlugin } from 'vue-query';
 import App from './App.vue';
 import router from './router';
+import './css/_reset.scss';
 import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/quasar.css';
 import './css/style.scss';

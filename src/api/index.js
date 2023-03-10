@@ -15,17 +15,6 @@ export const movieApi = {
 				page,
 			},
 		}),
-	discover: param =>
-		api.get('discover/movie', {
-			params: param,
-		}),
-	detail: id =>
-		api.get(`movie/${id}&append_to_response=videos`, {
-			params: {
-				append_to_response: 'videos',
-			},
-		}),
-	genre: () => api.get('genre/movie/list'),
 	nowPlaying: (page = 1) =>
 		api.get('movie/now_playing', {
 			params: {
@@ -35,6 +24,24 @@ export const movieApi = {
 	topRating: (page = 1) =>
 		api.get('movie/top_rated', {
 			params: {
+				page,
+			},
+		}),
+	discover: param =>
+		api.get('discover/movie', {
+			params: param,
+		}),
+	detail: id =>
+		api.get(`movie/${id}`, {
+			params: {
+				append_to_response: 'videos',
+			},
+		}),
+	genre: () => api.get('genre/movie/list'),
+	search: (type, keyword, page) =>
+		api.get(`search/${type}`, {
+			params: {
+				query: keyword,
 				page,
 			},
 		}),

@@ -5,7 +5,7 @@
 		<h3>Result</h3>
 		<TableLoading v-if="loading" />
 		<div v-else-if="error">{{ error }}</div>
-		<TableLists v-else :data="data" @goDetail="goDetail" />
+		<TableLists v-else :data="data" />
 		<div class="q-pa-lg flex flex-center">
 			<q-pagination v-model="current" :max="10" :max-pages="5" :ellipses="false" :boundary-numbers="false" direction-links @click="onSubmit" />
 		</div>
@@ -16,19 +16,16 @@ import TableForm from '@/components/TableForm.vue';
 import TableLists from '@/components/TableLists.vue';
 import TableLoading from '@/components/TableLoading.vue';
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { movieApi } from '@/api';
-
-const router = useRouter();
 const current = ref(1);
 const loading = ref(false);
 const error = ref(null);
 const data = ref([]);
 
-const onSubmit = (sort, genres) => {
-	fetchData(sort, genres);
+const onSubmit = (sort, genres, start, end) => {
+	fetchData(sort, genres, start, end);
 };
-async function fetchData(sort = 'release_date.desc', genres = '') {
+async function fetchData(sort = 'vote_count.desc', genres = '', start, end) {
 	try {
 		const genre = genres !== '' ? genres.join() : '';
 		loading.value = true;
@@ -37,6 +34,8 @@ async function fetchData(sort = 'release_date.desc', genres = '') {
 			page: current.value,
 			sort_by: sort, // release_date.desc, popularity.desc, vote_average.desc
 			with_genres: genre,
+			'primary_release_date.gte': start,
+			'primary_release_date.lte': end,
 		};
 		const res = await movieApi.discover(params);
 		data.value = res.data.results;
@@ -47,9 +46,6 @@ async function fetchData(sort = 'release_date.desc', genres = '') {
 	}
 }
 fetchData();
-const goDetail = id => {
-	router.push(`/movies/${id}`);
-};
 </script>
 <style scoped lang="scss">
 .popular__wrap {

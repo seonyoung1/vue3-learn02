@@ -3,7 +3,7 @@
 		<h2>Popular Movies</h2>
 		<TableLoading v-if="loading" />
 		<div v-else-if="error">{{ error }}</div>
-		<TableLists v-else :data="popular" @goDetail="goDetail" />
+		<TableLists v-else :data="popular" />
 		<div class="q-pa-lg flex flex-center">
 			<q-pagination v-model="current" :max="10" :max-pages="5" :ellipses="false" :boundary-numbers="false" direction-links @click="goFetch" />
 		</div>
@@ -36,9 +36,6 @@ async function fetchData(page) {
 fetchData(current.value);
 const goFetch = () => {
 	fetchData(current.value);
-};
-const goDetail = id => {
-	router.push(`/movies/${id}`);
 };
 </script>
 <style scoped lang="scss">
