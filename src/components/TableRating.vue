@@ -1,6 +1,6 @@
 <template>
 	<div class="row items-center justify-center">
-		<q-rating v-model="ratingModel" size="2em" readonly icon-half="star_half" />
+		<q-rating v-model="ratingModel" size="2em" readonly />
 		<span class="sub">{{ point }}</span>
 	</div>
 </template>
