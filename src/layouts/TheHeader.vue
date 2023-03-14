@@ -8,6 +8,7 @@
 				<q-btn-group outline>
 					<q-btn to="/popular" outline label="Popular" :class="activeLink('popular')" />
 					<q-btn to="/discover" outline label="Discover" :class="activeLink('discover')" />
+					<q-btn to="/post" outline label="Post" :class="activeLink('post')" />
 				</q-btn-group>
 			</nav>
 			<button class="search_btn" type="button" @click="store.searchToggle"><span>Search</span></button>
@@ -35,7 +36,7 @@ const activeLink = name => {
 	return path.includes(name) ? 'active' : '';
 };
 const onSearchSubmit = (select, keyword) => {
-	console.log(select.value, keyword);
+	// console.log(select.value, keyword);
 	router.push(`/search/?type=${select.value}&keyword=${keyword}`);
 };
 // const { searchShown } = storeToRefs(store);

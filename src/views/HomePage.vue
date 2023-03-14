@@ -25,6 +25,7 @@ fetchNowPlaying();
 const fetchTopRating = async () => {
 	try {
 		const res = await movieApi.topRating();
+		console.log(res.data.results);
 		topRating.value = res.data.results.slice(0, 5);
 	} catch (e) {
 		console.log(e);

@@ -6,6 +6,7 @@ import PopularPage from '@/views/PopularPage.vue';
 import DiscoverPage from '@/views/DiscoverPage.vue';
 import SearchPage from '@/views/SearchPage.vue';
 import DetailPage from '@/views/DetailPage.vue';
+import PostPage from '@/views/PostPage.vue';
 import NotFound from '@/views/NotFound.vue';
 const routes = [
 	{
@@ -44,6 +45,11 @@ const routes = [
 		component: SearchPage,
 	},
 	{
+		path: '/post',
+		name: 'Post',
+		component: PostPage,
+	},
+	{
 		path: '/:pathMatch(.*)*',
 		name: 'NotFound',
 		component: NotFound,
@@ -53,4 +59,9 @@ const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes,
 });
+// router.beforeEach((to, from) => {
+// 	console.log('to: ', to);
+// 	console.log('from: ', from);
+// });
+
 export default router;
