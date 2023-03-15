@@ -1,6 +1,9 @@
 <template>
 	<div class="post__wrap">
-		<h2 class="post_title">Post</h2>
+		<div class="row items-center justify-between">
+			<h2 class="post_title">Post</h2>
+			<q-btn color="primary" @click="editModeToggle">{{ editMode }}</q-btn>
+		</div>
 		<TableLoading v-if="loading" />
 		<div v-else-if="error">{{ error }}</div>
 		<q-markup-table v-else>
@@ -19,7 +22,8 @@
 			</thead>
 			<tbody>
 				<tr v-for="td in data" :key="td.id">
-					<PostContent :data="td" @editData="editData" />
+					<PostView v-if="!mode" :data="td" />
+					<PostEdit v-else :data="td" @editData="editData" />
 				</tr>
 			</tbody>
 		</q-markup-table>
@@ -27,11 +31,13 @@
 </template>
 <script setup>
 import TableLoading from '@/components/TableLoading.vue';
-import PostContent from '@/components/post/PostContent.vue';
-import { ref } from 'vue';
-import { posts } from '../api/posts';
+import PostView from '@/components/post/PostView.vue';
+import PostEdit from '@/components/post/PostEdit.vue';
+import { computed, ref } from 'vue';
+import { postApi } from '@/api/posts';
 import { useMainStore } from '@/stores/main';
 import { storeToRefs } from 'pinia';
+import { useQuasar } from 'quasar';
 
 const loading = ref(false);
 const error = ref(null);
@@ -57,7 +63,7 @@ const columns = [
 async function fetchData() {
 	try {
 		loading.value = true;
-		const res = await posts.get('');
+		const res = await postApi.post();
 		data.value = res.data;
 	} catch (err) {
 		error.value = err;
@@ -67,18 +73,38 @@ async function fetchData() {
 }
 fetchData();
 
+const quasar = useQuasar();
+function showNotify(message) {
+	quasar.notify({
+		message: message,
+		color: 'teal',
+		position: 'top-right',
+	});
+}
 const editError = ref(null);
 const { loadingShown } = storeToRefs(useMainStore());
 const editData = async (id, content) => {
-	// console.log(content);
 	try {
 		loadingShown.value = true;
-		await posts.patch(`/${id}`, content);
+		await postApi.edit(id, content);
 	} catch (err) {
 		editError.value = err;
 	} finally {
+		// await fetchData();
+		data.value = data.value.map(item => {
+			return item.id === id ? { ...content } : item;
+		});
 		loadingShown.value = false;
+		showNotify('수정완료');
 	}
+};
+
+const mode = ref(false);
+const editMode = computed(() => {
+	return mode.value === false ? '수정' : '완료';
+});
+const editModeToggle = () => {
+	mode.value = !mode.value;
 };
 </script>
 <style scoped lang="scss">

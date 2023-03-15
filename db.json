@@ -18,7 +18,6 @@
       "video": false,
       "vote_average": 8.7,
       "vote_count": "17593",
-      "dataTitle": "대부123",
       "count": "17593",
       "date": "1972-03-15"
     },
@@ -51,7 +50,7 @@
       "id": 772071,
       "original_language": "es",
       "original_title": "Cuando Sea Joven",
-      "overview": "내용 채우기",
+      "overview": "멕시코 영화",
       "popularity": 50.035,
       "poster_path": "/6gIJuFHh5Lj4dNaPG3TzIMl7L68.jpg",
       "release_date": "2022-09-14",
@@ -396,7 +395,12 @@
   "reviews": [
     {
       "id": 238,
-      "results": []
+      "results": [
+        {
+          "id": 1,
+          "content": "너무 재미있게 봤습니다."
+        }
+      ]
     }
   ]
 }

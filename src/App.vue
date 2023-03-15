@@ -15,7 +15,7 @@ import { useMainStore } from './stores/main';
 const store = useMainStore();
 </script>
 
-<style>
+<style scoped>
 .loading {
 	position: fixed;
 	left: 0;

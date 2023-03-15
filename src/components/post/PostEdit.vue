@@ -43,7 +43,9 @@ const editContents = type => {
 	const id = props.data.id;
 	switch (type) {
 		case 'title':
+			// console.log(props.data.title, title.value);
 			if (props.data.title === title.value || isTitleValid.value) return;
+			// console.log('저장');
 			emit('editData', id, { ...props.data, title: title.value });
 			break;
 		case 'overview':
