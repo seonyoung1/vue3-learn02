@@ -40,12 +40,31 @@
 			</div>
 		</template>
 	</div>
+	<h3 class="review_title">리뷰</h3>
+	<hr />
+	<TableLoading v-if="reviewLoading" />
+	<div class="error review_item" v-else-if="reviewError">{{ reviewError }}</div>
+	<div v-else class="review_list">
+		<div class="review_item q-gutter-sm" v-for="item in reviewData" :key="item">
+			<p class="content">{{ item.content }}</p>
+			<p class="date">{{ item.date }}</p>
+			<q-btn outline color="primary">삭제</q-btn>
+		</div>
+	</div>
+	<hr />
+	<div class="review_write">
+		<form class="row q-gutter-md">
+			<textarea></textarea>
+			<q-btn type="submit" outline color="primary">등록</q-btn>
+		</form>
+	</div>
 </template>
 <script setup>
 import TableLoading from '@/components/TableLoading.vue';
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
-import { movieApi } from '../api';
+import { movieApi } from '@/api';
+import { reviewApi } from '@/api/posts';
 const route = useRoute();
 const id = route.params.id;
 const loading = ref(false);
@@ -64,6 +83,20 @@ async function fetchData() {
 	}
 }
 fetchData();
+
+const reviewData = ref([]);
+const reviewLoading = ref(false);
+const reviewError = ref(null);
+async function fetchReview() {
+	try {
+		const res = await reviewApi.post(id);
+		console.log(res);
+		reviewData.value = res.data.results;
+	} catch (err) {
+		reviewError.value = '등록된 리뷰가 없습니다';
+	}
+}
+fetchReview();
 </script>
 <style scoped lang="scss">
 .details__wrap {
@@ -92,5 +125,27 @@ h3 {
 .tagline {
 	font-weight: bold;
 	font-size: 1.4em;
+}
+
+.review_title {
+	padding-bottom: 0;
+}
+.review_item {
+	padding: 10px 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.content {
+		width: 80%;
+	}
+}
+.review_write {
+	padding-bottom: 100px;
+	textarea {
+		width: 500px;
+		height: 50px;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+	}
 }
 </style>

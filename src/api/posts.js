@@ -15,5 +15,6 @@ export const review = axios.create({
 
 export const reviewApi = {
 	post: id => review.get(`/${id}`),
-	edit: (id, content) => review.patch(`/${id}`, content),
+	edit: (id, data) => review.patch(`/${id}`, data),
+	create: (id, data) => review.post(`/${id}`, data),
 };
