@@ -99,7 +99,7 @@ const editData = async (id, content) => {
 	}
 };
 
-const mode = ref(false);
+const mode = ref(true);
 const editMode = computed(() => {
 	return mode.value === false ? '수정' : '완료';
 });
