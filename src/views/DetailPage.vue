@@ -42,17 +42,24 @@
 			</template>
 		</div>
 
-		<ReviewContent :data="reviewData" :loading="reviewLoading" :error="reviewError" @onCreate="onCreateReviews" @onDelete="onDeleteReviews" />
+		<ReviewContent
+			:data="reviewData"
+			:loading="reviewLoading"
+			:error="reviewError"
+			@onCreate="onCreateReviews"
+			@onDelete="onDeleteReviews"
+			@onEdit="onEditReviews"
+		/>
 	</div>
 </template>
 <script setup>
 import TableLoading from '@/components/TableLoading.vue';
 import ReviewContent from '@/components/ReviewContent.vue';
+import dayjs from 'dayjs';
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
 import { movieApi } from '@/api';
 import { reviewApi } from '@/api/posts';
-import dayjs from 'dayjs';
 import { storeToRefs } from 'pinia';
 import { useMainStore } from '@/stores/main';
 
@@ -126,6 +133,23 @@ const onDeleteReviews = async id => {
 		reviewData.value = reviewData.value.filter(item => item.id !== id);
 	} catch (err) {
 		deleteError.value = err;
+	} finally {
+		loadingShown.value = false;
+	}
+};
+
+// review edit
+const editError = ref(null);
+const onEditReviews = async (id, content) => {
+	try {
+		loadingShown.value = true;
+		const originData = reviewData.value.filter(item => item.id === id)[0];
+		const res = await reviewApi.edit(id, { ...originData, content });
+		reviewData.value = reviewData.value.map(item => {
+			return item.id === id ? { ...res.data } : item;
+		});
+	} catch (err) {
+		editError.value = err;
 	} finally {
 		loadingShown.value = false;
 	}

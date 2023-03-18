@@ -7,13 +7,18 @@
 		<div class="review_item" v-else v-for="item in data" :key="item">
 			<p class="content">{{ item.content }}</p>
 			<p class="date">{{ item.created_at }}</p>
+			<q-btn v-if="!isEdit" outline color="primary" @click="onEditCheck(item.id, item.content)">수정</q-btn>
 			<q-btn outline color="primary" @click="$emit('onDelete', item.id)">삭제</q-btn>
 		</div>
 	</div>
 	<div class="review_write">
-		<form class="row q-gutter-md" @submit.prevent="onSubmit">
+		<form v-if="!isEdit" class="row q-gutter-md" @submit.prevent="onSubmit">
 			<textarea v-model="content" ref="inputContent"></textarea>
 			<q-btn type="submit" outline color="primary">등록</q-btn>
+		</form>
+		<form v-else class="row q-gutter-md" @submit.prevent="onEditSubmit">
+			<textarea v-model="editContent" ref="inputEditContent"></textarea>
+			<q-btn type="submit" outline color="primary">수정</q-btn>
 		</form>
 	</div>
 </template>
@@ -25,9 +30,12 @@ defineProps({
 	error: String,
 	data: Array,
 });
-const emit = defineEmits(['onCreate', 'onDelete']);
+const emit = defineEmits(['onCreate', 'onDelete', 'onEdit']);
 const content = ref('');
+const editContent = ref('');
 const inputContent = ref(null);
+const inputEditContent = ref(null);
+const isEdit = ref(false);
 const onSubmit = () => {
 	if (content.value.trim() === '') {
 		alert('리뷰를 입력해주세요');
@@ -36,6 +44,20 @@ const onSubmit = () => {
 	}
 	emit('onCreate', content.value);
 	content.value = '';
+};
+let editId = null;
+const onEditCheck = (id, content) => {
+	isEdit.value = true;
+	editId = id;
+	editContent.value = content;
+	setTimeout(() => {
+		inputEditContent.value.focus();
+	}, 100);
+};
+const onEditSubmit = () => {
+	emit('onEdit', editId, editContent.value);
+	isEdit.value = false;
+	editContent.value = '';
 };
 </script>
 <style scoped lang="scss">
@@ -59,7 +81,7 @@ h3 {
 		border-bottom: 1px solid #ccc;
 	}
 	.content {
-		width: 80%;
+		width: 78%;
 	}
 }
 .review_write {
