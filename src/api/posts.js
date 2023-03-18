@@ -14,7 +14,13 @@ export const review = axios.create({
 });
 
 export const reviewApi = {
-	post: id => review.get(`/${id}`),
+	post: param =>
+		review.get('', {
+			params: {
+				...param,
+			},
+		}),
 	edit: (id, data) => review.patch(`/${id}`, data),
-	create: (id, data) => review.post(`/${id}`, data),
+	create: data => review.post('/', data),
+	delete: id => review.delete(`/${id}`),
 };
